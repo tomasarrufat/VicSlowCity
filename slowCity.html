@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Interactivo de Vic, España</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony (Alabaster, White, Charcoal, Muted Terracotta, Slate Blue) -->
+    <!-- Application Structure Plan: The SPA has been redesigned with a more granular four-section structure: 'Visión General', 'Vivir y Familia', 'Mercado Inmobiliario', and 'Economía y Conectividad'. This aligns more closely with the detailed source report, allowing users to dive deep into specific topics. The structure uses a mix of KPI cards for high-level stats, interactive charts for trends, detailed text blocks for qualitative analysis, and accordions to manage dense information like neighborhood details or company lists. This prevents cognitive overload while providing full access to all report data, facilitating a comprehensive understanding for different user profiles (families, investors, commuters). -->
+    <!-- Visualization & Content Choices: 
+        - Goal: Inform (Overview) -> KPI Cards & Intro Text -> HTML/CSS -> Provides a quick, scannable summary of Vic's identity and key metrics.
+        - Goal: Detail (Neighborhoods/Companies) -> Accordion Panels -> JS click events -> Manages large blocks of text, allowing users to selectively explore detailed descriptions without cluttering the UI.
+        - Goal: Compare (Cost of Living/Market Data) -> Styled Tables -> HTML/Tailwind -> Presents structured data from the report clearly and effectively for direct comparison.
+        - Goal: Change (Market Trend/Crime) -> Line & Bar Charts -> Chart.js -> Visualizes quantitative data for easy interpretation of trends and comparisons.
+        - Goal: Organize (Amenities/Transport) -> Icon-based Grids & Lists -> HTML/Tailwind -> Breaks down lists of services into easily digestible visual formats.
+        - Justification: This expanded set of components directly translates the rich text and tables from the source report into an interactive format, ensuring no information is lost while enhancing usability and engagement. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8F6F4; }
+        .nav-active { border-bottom-color: #D97706; color: #D97706; background-color: #FFFBEB; }
+        .nav-inactive { border-bottom-color: transparent; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        @media (max-width: 768px) { .chart-container { height: 300px; } }
+        .smooth-transition { transition: all 0.3s ease-in-out; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height: 0.5s ease-in-out; }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #D97706;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-2">Descubriendo Vic</h1>
+            <p class="text-lg text-slate-600 max-w-3xl mx-auto">Un análisis interactivo de la ciudad de los contrastes: tranquila y familiar, pero con un vibrante pulso cultural y económico.</p>
+        </header>
+
+        <nav class="sticky top-0 bg-white/90 backdrop-blur-sm shadow-md z-10 mb-8 rounded-lg">
+            <div class="grid grid-cols-2 md:grid-cols-4 text-center">
+                <button data-section="general" class="nav-btn nav-active text-sm md:text-base font-semibold p-3 md:p-4 border-b-2 smooth-transition">🌟 Visión General</button>
+                <button data-section="vivir" class="nav-btn nav-inactive text-sm md:text-base font-semibold p-3 md:p-4 border-b-2 text-slate-500 smooth-transition">🏘️ Vivir y Familia</button>
+                <button data-section="invertir" class="nav-btn nav-inactive text-sm md:text-base font-semibold p-3 md:p-4 border-b-2 text-slate-500 smooth-transition">💰 Mercado Inmobiliario</button>
+                <button data-section="economia" class="nav-btn nav-inactive text-sm md:text-base font-semibold p-3 md:p-4 border-b-2 text-slate-500 smooth-transition">📈 Economía y Conectividad</button>
+            </div>
+        </nav>
+
+        <main>
+            <section id="general" class="space-y-8 md:space-y-12">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Carácter y Reputación</h2>
+                    <p class="text-slate-600 mb-4">Vic es una ciudad de contrastes, que combina la tranquilidad de un pueblo pequeño con una animada escena cultural. Su rico patrimonio medieval, visible en su centro histórico, convive con un desarrollo moderno y una vibrante presencia universitaria. La ciudad es conocida por su activa vida cultural —frecuentes festivales, ferias y un famoso mercado semanal en la Plaça Major— que le confieren un ambiente animado y orientado a la comunidad. Al mismo tiempo, los lugareños consideran que Vic es muy segura y tranquila en el día a día, y se informa de que "apenas hay problemas graves", lo que refleja un ambiente familiar y apacible en general.</p>
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                        <div class="bg-slate-50 p-4 rounded-lg border">
+                            <p class="text-sm text-slate-500">Población (2024)</p>
+                            <p class="text-2xl font-bold text-slate-900">~49,000</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border">
+                            <p class="text-sm text-slate-500">Población Extranjera</p>
+                            <p class="text-2xl font-bold text-slate-900">~30%</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border">
+                            <p class="text-sm text-slate-500">Renta Bruta Media</p>
+                            <p class="text-2xl font-bold text-slate-900">€35,100</p>
+                        </div>
+                         <div class="bg-slate-50 p-4 rounded-lg border">
+                            <p class="text-sm text-slate-500">Crecimiento Anual</p>
+                            <p class="text-2xl font-bold text-green-600">+1.5%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-2">Seguridad Ciudadana</h3>
+                    <p class="text-slate-600 mb-4">Vic se considera, en general, un lugar seguro y pacífico. El índice de criminalidad es relativamente bajo, los residentes se sienten cómodos paseando y los delitos violentos son poco frecuentes. Sin embargo, como en cualquier ciudad, existen algunos problemas puntuales: por ejemplo, el barrio del Remei se ha enfrentado a problemas de ocupación ilegal y pequeña delincuencia en los últimos años. Es importante destacar que estos problemas se concentran en una zona; el resto de la ciudad sigue siendo segura, con un fuerte sentimiento de comunidad.</p>
+                    <div class="chart-container">
+                        <canvas id="crimeChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Recomendaciones Estratégicas</h2>
+                    <p class="text-slate-600 mb-6">Basado en el análisis completo, Vic ofrece oportunidades claras para diferentes perfiles. Haz clic para ver las recomendaciones específicas.</p>
+                    <div class="space-y-2">
+                        <div class="accordion-item">
+                            <button class="accordion-header w-full text-left p-4 bg-amber-50 rounded-lg font-semibold flex justify-between items-center">
+                                👨‍👩‍👧‍👦 Para la Familia
+                                <span class="accordion-icon text-xl font-bold">+</span>
+                            </button>
+                            <div class="accordion-content p-4 bg-white border border-t-0 rounded-b-lg">
+                                <p class="text-slate-600">Vic es un entorno excepcional. Ofrece seguridad, un fuerte sentido de comunidad, y excelentes colegios y sanidad. El estilo de vida "slow" y el acceso a la naturaleza son ideales. <br><br><strong>Recomendación:</strong> Barrios como <strong>Santa Clara-Hospital</strong> por su tranquilidad y conveniencia, o las nuevas promociones en <strong>Estadi-Horta Vermella</strong>.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header w-full text-left p-4 bg-amber-50 rounded-lg font-semibold flex justify-between items-center">
+                                💼 Para el Inversor
+                                <span class="accordion-icon text-xl font-bold">+</span>
+                            </button>
+                            <div class="accordion-content p-4 bg-white border border-t-0 rounded-b-lg">
+                                <p class="text-slate-600">El mercado está en un punto óptimo. Combina un crecimiento de precios estable con una asequibilidad relativa a Barcelona. La demanda de alquiler es constante y robusta, gracias a los estudiantes de la UVic-UCC. <br><br><strong>Recomendación:</strong> Inversión "buy-to-let" en el barrio <strong>El Sucre-Universitat</strong>. Apartamentos de 2-3 habitaciones para alquilar a estudiantes ofrecen un gran potencial de rendimiento.</p>
+                            </div>
+                        </div>
+                         <div class="accordion-item">
+                            <button class="accordion-header w-full text-left p-4 bg-amber-50 rounded-lg font-semibold flex justify-between items-center">
+                                🚆 Para el Profesional/Commuter
+                                <span class="accordion-icon text-xl font-bold">+</span>
+                            </button>
+                            <div class="accordion-content p-4 bg-white border border-t-0 rounded-b-lg">
+                                <p class="text-slate-600">Una alternativa excelente a Barcelona. La conexión en tren (R3, ~75 min) es fiable, aunque no de alta velocidad. El coste de vida es drásticamente inferior, permitiendo un mayor poder adquisitivo. <br><br><strong>Recomendación:</strong> Apartamentos modernos cerca de la estación en <strong>El Sucre-Universitat</strong> o <strong>Santa Clara</strong> para un estilo de vida cómodo y bien conectado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section id="vivir" class="hidden space-y-8 md:space-y-12">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Guía de Barrios Residenciales</h2>
+                    <p class="text-slate-600 mb-6">Cada barrio de Vic ofrece un carácter distinto. La elección depende del estilo de vida, presupuesto y necesidades familiares. Explora las descripciones o usa nuestro asistente de IA para encontrar tu barrio ideal.</p>
+                    <div id="neighborhood-selector" class="grid grid-cols-2 md:grid-cols-5 gap-2 mb-6"></div>
+                    <div id="neighborhood-display" class="bg-slate-50 p-6 rounded-lg border border-slate-200 min-h-[200px] smooth-transition"></div>
+                </div>
+
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-2">✨ Asistente de Búsqueda de Barrio</h3>
+                    <p class="text-slate-600 mb-4">Describe tu estilo de vida y lo que buscas en un barrio. Nuestra IA te recomendará el más adecuado.</p>
+                    <textarea id="lifestyle-input" class="w-full p-2 border rounded-md" placeholder="Ej: Somos una familia con dos niños pequeños, buscamos zonas verdes, colegios cerca y un ambiente tranquilo."></textarea>
+                    <button id="find-neighborhood-btn" class="mt-2 px-4 py-2 bg-amber-600 text-white font-semibold rounded-md hover:bg-amber-700 smooth-transition">Encontrar mi barrio ideal</button>
+                    <div id="neighborhood-result" class="mt-4 p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg hidden"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold mb-2">Sistema Educativo</h3>
+                        <p class="text-slate-600 mb-4">Vic es conocida por su sólida oferta educativa. Hay numerosas escuelas primarias y secundarias, tanto públicas como concertadas (semiprivadas), como el prestigioso Col·legi Sant Miquel dels Sants. La presencia de la Universidad de Vic - Universitat Central de Catalunya (UVic) eleva el entorno educativo de la ciudad.</p>
+                    </div>
+                     <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold mb-2">Sanidad y Servicios Sociales</h3>
+                        <p class="text-slate-600 mb-4">Vic es el centro sanitario de Osona. El Hospital Universitari de Vic es un moderno hospital general que da servicio a la región, y hay varias clínicas de atención primaria (CAP). El sistema sanitario es robusto y accesible.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="invertir" class="hidden space-y-8 md:space-y-12">
+                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Análisis del Mercado Inmobiliario</h2>
+                    <p class="text-slate-600 mb-6">El mercado de la vivienda en Vic ha sido moderadamente fuerte, con una tendencia general al alza en los últimos años. La demanda procede de familias locales, de personas que se trasladan desde Barcelona en busca de un mejor coste de vida y de inversores que buscan propiedades para alquilar (especialmente para estudiantes).</p>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Precio de Venta (€/m²)</h3>
+                             <p class="text-center text-4xl font-bold text-slate-800 my-8">~€2,086<span class="text-lg font-normal text-slate-500">/m²</span></p>
+                            <p class="text-slate-600 text-center">Menos de la mitad del precio medio de Barcelona, lo que pone de manifiesto la relativa asequibilidad de Vic.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Precio del Alquiler (€/m²/mes)</h3>
+                            <p class="text-center text-4xl font-bold text-slate-800 my-8">~€9.8<span class="text-lg font-normal text-slate-500">/m²</span></p>
+                            <p class="text-slate-600 text-center">Un mercado de alquiler activo, impulsado por la población estudiantil y los residentes locales.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-2">✨ Análisis de Inversión con IA</h3>
+                    <p class="text-slate-600 mb-4">Define tu perfil de inversor y deja que nuestra IA analice las oportunidades en Vic para ti.</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="investment-goal" class="block text-sm font-medium text-slate-700">Objetivo de Inversión</label>
+                            <select id="investment-goal" class="mt-1 block w-full p-2 border rounded-md">
+                                <option>Rendimiento por alquiler a largo plazo</option>
+                                <option>Apreciación del capital a medio plazo</option>
+                                <option>Comprar, reformar y vender (Fix & Flip)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="investment-budget" class="block text-sm font-medium text-slate-700">Presupuesto (€)</label>
+                            <input type="number" id="investment-budget" class="mt-1 block w-full p-2 border rounded-md" placeholder="Ej: 200000">
+                        </div>
+                    </div>
+                    <button id="analyze-investment-btn" class="mt-4 px-4 py-2 bg-amber-600 text-white font-semibold rounded-md hover:bg-amber-700 smooth-transition">Analizar Oportunidad</button>
+                    <div id="investment-result" class="mt-4 p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg hidden"></div>
+                </div>
+
+                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-2">Impuestos sobre la Propiedad y Coste de la Vida</h3>
+                    <p class="text-slate-600 mb-4">El coste de la vida en Vic es moderado. Los gastos diarios como la compra, la restauración y los servicios están a la par o ligeramente por debajo de la media española. El impuesto anual sobre bienes inmuebles (IBI) en Vic es de aproximadamente el <span class="font-bold">0,626%</span> del valor catastral de la propiedad, una de las tasas más bajas para ciudades comparables de la provincia. Hay descuentos disponibles para viviendas energéticamente eficientes y familias numerosas.</p>
+                </div>
+            </section>
+            
+            <section id="economia" class="hidden space-y-8 md:space-y-12">
+                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Motor Económico de Osona</h2>
+                    <p class="text-slate-600 mb-6">La economía de Vic es diversa y resistente, anclada en un potente sector agroalimentario, una industria sólida y un sector servicios que actúa como centro comercial para toda la comarca. Esta estabilidad proporciona una base de empleo sólida.</p>
+                    <div class="accordion-item">
+                        <button class="accordion-header w-full text-left p-4 bg-amber-50 rounded-lg font-semibold flex justify-between items-center">
+                            Principales Empresas y Empleadores
+                            <span class="accordion-icon text-xl font-bold">+</span>
+                        </button>
+                        <div class="accordion-content p-4 bg-white border border-t-0 rounded-b-lg">
+                            <ul class="list-disc list-inside space-y-2 text-slate-600">
+                                <li><strong>Industria agroalimentaria:</strong> Empresas como Casa Tarradellas (en la cercana Gurb) son líderes nacionales y grandes empleadores.</li>
+                                <li><strong>Sector servicios:</strong> El comercio minorista, la educación (Universidad de Vic) y la sanidad (Consorci Hospitalari de Vic) son pilares del empleo local.</li>
+                                <li><strong>Industria metalúrgica:</strong> Un sector tradicional que se ha modernizado y sigue siendo importante.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                 <div class="grid md:grid-cols-2 gap-8">
+                     <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold mb-2">Conectividad y Transporte</h3>
+                        <p class="text-slate-600 mb-4">Vic está estratégicamente ubicada y excelentemente comunicada, facilitando tanto la vida diaria como los desplazamientos regionales.</p>
+                         <div class="space-y-4">
+                            <div class="flex items-center space-x-4"><span class="text-xl font-bold text-amber-700 w-16 text-center">R3</span><div><h4 class="font-semibold">Tren a Barcelona</h4><p class="text-slate-600 text-sm">~1h 15min a Plaça Catalunya. No es de alta velocidad, pero es una opción para los que se desplazan al trabajo.</p></div></div>
+                            <div class="flex items-center space-x-4"><span class="text-xl font-bold text-amber-700 w-16 text-center">C-17</span><div><h4 class="font-semibold">Autovía a Barcelona</h4><p class="text-slate-600 text-sm">~55 min en coche (69 km).</p></div></div>
+                            <div class="flex items-center space-x-4"><span class="text-xl font-bold text-amber-700 w-16 text-center">C-25</span><div><h4 class="font-semibold">Eix Transversal</h4><p class="text-slate-600 text-sm">Conexión este-oeste con Girona (~50 min) y Lleida (~2h).</p></div></div>
+                             <p class="text-sm text-slate-500 pt-2">Aeropuertos de Barcelona (BCN) y Girona (GRO) a ~1h de distancia.</p>
+                        </div>
+                    </div>
+                     <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold mb-2">Cultura, Ocio y Deporte</h3>
+                        <p class="text-slate-600 mb-4">La oferta cultural y de ocio es rica y variada. Planifica tu visita con nuestro generador de itinerarios.</p>
+                         <div class="space-y-4">
+                            <div class="flex items-start space-x-4"><span class="text-2xl">🏛️</span><div><h4 class="font-semibold">Museo Episcopal (MEV)</h4><p class="text-slate-600 text-sm">Colección de arte medieval de referencia mundial.</p></div></div>
+                            <div class="flex items-start space-x-4"><span class="text-2xl">🎭</span><div><h4 class="font-semibold">L'Atlàntida</h4><p class="text-slate-600 text-sm">Centro de artes escénicas para toda la comarca.</p></div></div>
+                            <div class="flex items-start space-x-4"><span class="text-2xl">🏞️</span><div><h4 class="font-semibold">Naturaleza y Deporte</h4><p class="text-slate-600 text-sm">Acceso al Montseny. Múltiples gimnasios y un gran Decathlon.</p></div></div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-2">✨ Generador de Itinerarios</h3>
+                    <p class="text-slate-600 mb-4">Selecciona tus intereses y la duración de tu visita para obtener un plan personalizado.</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="interests" class="block text-sm font-medium text-slate-700">Intereses</label>
+                            <select id="interests" class="mt-1 block w-full p-2 border rounded-md">
+                                <option>Historia y Cultura</option>
+                                <option>Gastronomía Local</option>
+                                <option>Naturaleza y Senderismo</option>
+                                <option>Diversión en Familia</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="duration" class="block text-sm font-medium text-slate-700">Duración</label>
+                             <select id="duration" class="mt-1 block w-full p-2 border rounded-md">
+                                <option>1 día</option>
+                                <option>Un fin de semana (2 días)</option>
+                                <option>3 días</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="generate-itinerary-btn" class="mt-4 px-4 py-2 bg-amber-600 text-white font-semibold rounded-md hover:bg-amber-700 smooth-transition">✨ Generar Itinerario</button>
+                    <div id="itinerary-result" class="mt-4 p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg hidden"></div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-12 pt-8 border-t border-slate-200">
+            <p class="text-sm text-slate-500">Aplicación generada a partir de un análisis exhaustivo de Vic, España.</p>
+            <p class="text-xs text-slate-400 mt-1">Los datos reflejan la información disponible hasta principios de 2025.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sections = {
+                general: document.getElementById('general'),
+                vivir: document.getElementById('vivir'),
+                invertir: document.getElementById('invertir'),
+                economia: document.getElementById('economia')
+            };
+            const navButtons = document.querySelectorAll('.nav-btn');
+
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetSection = button.dataset.section;
+
+                    Object.values(sections).forEach(section => section.classList.add('hidden'));
+                    sections[targetSection].classList.remove('hidden');
+
+                    navButtons.forEach(btn => {
+                        btn.classList.remove('nav-active');
+                        btn.classList.add('nav-inactive', 'text-slate-500');
+                    });
+                    button.classList.add('nav-active');
+                    button.classList.remove('nav-inactive', 'text-slate-500');
+                });
+            });
+
+            const neighborhoods = [
+                { id: 'casc-antic', name: 'Casc Antic', vibe: 'Histórico y con encanto', ideal: 'Amantes de la cultura, solteros', housing: 'Apartamentos históricos renovados. Acceso inmediato a tiendas y eventos.' },
+                { id: 'el-sucre', name: 'El Sucre-Universitat', vibe: 'Moderno y académico', ideal: 'Estudiantes, jóvenes profesionales', housing: 'Apartamentos y dúplex modernos. Zona animada pero no ruidosa.' },
+                { id: 'santa-clara', name: 'Santa Clara-Hospital', vibe: 'Tranquilo y conveniente', ideal: 'Familias, personal sanitario', housing: 'Mixto de pisos y casas. Zonas verdes y proximidad al hospital.' },
+                { id: 'estadi', name: 'Estadi-Horta Vermella', vibe: 'Residencial y deportivo', ideal: 'Familias, amantes del deporte', housing: 'Nuevas construcciones con terrazas y zonas comunes.' },
+                { id: 'remei', name: 'Remei', vibe: 'Asequible y en revitalización', ideal: 'Quienes buscan precios más bajos', housing: 'Barrio obrero con problemas pasados de ocupación, pero en mejora con nuevas infraestructuras como la biblioteca.' }
+            ];
+
+            const neighborhoodSelector = document.getElementById('neighborhood-selector');
+            const neighborhoodDisplay = document.getElementById('neighborhood-display');
+            
+            neighborhoods.forEach((n, index) => {
+                const button = document.createElement('button');
+                button.textContent = n.name;
+                button.dataset.id = n.id;
+                button.className = `p-2 rounded-md text-sm border smooth-transition ${index === 0 ? 'bg-amber-600 text-white border-amber-600' : 'bg-white text-amber-700 border-amber-200 hover:bg-amber-50'}`;
+                neighborhoodSelector.appendChild(button);
+            });
+
+            function updateNeighborhoodDisplay(id) {
+                const neighborhood = neighborhoods.find(n => n.id === id);
+                neighborhoodDisplay.innerHTML = `
+                    <h4 class="font-bold text-lg text-slate-800">${neighborhood.name}</h4>
+                    <p class="text-sm text-amber-700 font-semibold mb-2">${neighborhood.vibe}</p>
+                    <p class="text-slate-600 mb-1"><strong class="font-semibold">Ideal para:</strong> ${neighborhood.ideal}</p>
+                    <p class="text-slate-600"><strong class="font-semibold">Vivienda principal:</strong> ${neighborhood.housing}</p>
+                `;
+                 document.querySelectorAll('#neighborhood-selector button').forEach(btn => {
+                    btn.className = `p-2 rounded-md text-sm border smooth-transition ${btn.dataset.id === id ? 'bg-amber-600 text-white border-amber-600' : 'bg-white text-amber-700 border-amber-200 hover:bg-amber-50'}`;
+                });
+            }
+            
+            neighborhoodSelector.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    updateNeighborhoodDisplay(e.target.dataset.id);
+                }
+            });
+            updateNeighborhoodDisplay('casc-antic');
+
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('.accordion-icon');
+                    const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+                    if (isOpen) {
+                        content.style.maxHeight = '0px';
+                        icon.textContent = '+';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        icon.textContent = '-';
+                    }
+                });
+            });
+
+            const crimeData = {
+                labels: ['Delitos Totales', 'Robos con Violencia', 'Robos en Domicilio'],
+                datasets: [{
+                    label: 'Tendencia Reciente',
+                    data: [2, 0, 5], 
+                    backgroundColor: ['#64748b', '#16a34a', '#f59e0b'],
+                    borderColor: ['#475569', '#15803d', '#d97706'],
+                    borderWidth: 1
+                }]
+            };
+            new Chart(document.getElementById('crimeChart'), {
+                type: 'bar', data: crimeData, options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true, title: { display: true, text: 'Variación Anual Aprox. (%)' } } }, plugins: { legend: { display: false }, title: {display: true, text: 'Tendencia General de la Criminalidad'} } }
+            });
+
+            async function callGemini(prompt, resultElement) {
+                resultElement.innerHTML = '<div class="loader"></div>';
+                resultElement.classList.remove('hidden');
+
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: prompt }] }]
+                };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API request failed with status ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    
+                    if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        resultElement.innerHTML = text.replace(/\n/g, '<br>');
+                    } else {
+                        resultElement.innerHTML = '<p class="text-red-600">No se pudo obtener una respuesta. Por favor, inténtalo de nuevo.</p>';
+                    }
+                } catch (error) {
+                    console.error('Error calling Gemini API:', error);
+                    resultElement.innerHTML = `<p class="text-red-600">Error al contactar con el servicio de IA. Detalles: ${error.message}</p>`;
+                }
+            }
+            
+            const neighborhoodDataForPrompt = `
+                - Casco Antiguo: Histórico y con encanto. Ideal para amantes de la cultura. Vivienda en apartamentos históricos renovados.
+                - El Sucre-Universitat: Moderno y académico. Ideal para estudiantes y jóvenes profesionales. Vivienda en apartamentos y dúplex modernos.
+                - Santa Clara-Hospital: Tranquilo y conveniente. Ideal para familias y personal sanitario. Mixto de pisos y casas, con zonas verdes.
+                - Estadi-Horta Vermella: Residencial y deportivo. Ideal para familias. Nuevas construcciones con terrazas.
+                - Remei: Asequible y en revitalización. Ideal para quienes buscan precios más bajos. Barrio obrero con problemas pasados, pero en mejora con nuevas infraestructuras.
+            `;
+
+            document.getElementById('find-neighborhood-btn').addEventListener('click', () => {
+                const lifestyle = document.getElementById('lifestyle-input').value;
+                if (!lifestyle) {
+                    alert('Por favor, describe tu estilo de vida.');
+                    return;
+                }
+                const prompt = `Como experto inmobiliario de Vic, analiza la siguiente descripción de un cliente y recomiéndale el mejor barrio de Vic. Justifica tu respuesta basándote en estos datos de los barrios: ${neighborhoodDataForPrompt}. Cliente: "${lifestyle}"`;
+                callGemini(prompt, document.getElementById('neighborhood-result'));
+            });
+
+            document.getElementById('analyze-investment-btn').addEventListener('click', () => {
+                const goal = document.getElementById('investment-goal').value;
+                const budget = document.getElementById('investment-budget').value;
+                if (!budget) {
+                    alert('Por favor, introduce tu presupuesto.');
+                    return;
+                }
+                const prompt = `Actúa como un analista de inversiones inmobiliarias para Vic, España. Un cliente tiene un presupuesto de ${budget}€ y su objetivo es "${goal}". Basándote en que el precio medio es 2,086€/m², la fuerte demanda de alquiler por parte de estudiantes, y un mercado estable, proporciona un breve análisis de la oportunidad, sugiriendo qué tipo de propiedad y en qué barrio podría ser más interesante. Menciona el potencial de rendimiento por alquiler.`;
+                callGemini(prompt, document.getElementById('investment-result'));
+            });
+
+            document.getElementById('generate-itinerary-btn').addEventListener('click', () => {
+                const interests = document.getElementById('interests').value;
+                const duration = document.getElementById('duration').value;
+                const prompt = `Crea un itinerario detallado para una visita a Vic, España, de ${duration}. El visitante está interesado en "${interests}". Utiliza lugares clave de Vic como el Museo Episcopal (MEV), la Plaça Major, el Templo Romano, la Catedral, y recomienda experiencias locales como probar la llonganissa de Vic o pasear por el río. Estructura la respuesta por días (Día 1, Día 2, etc.) y momentos (Mañana, Tarde, Noche).`;
+                callGemini(prompt, document.getElementById('itinerary-result'));
+            });
+
+        });
+    </script>
+</body>
+</html>
