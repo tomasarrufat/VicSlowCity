@@ -27,19 +27,6 @@
         @media (max-width: 768px) { .chart-container { height: 300px; } }
         .smooth-transition { transition: all 0.3s ease-in-out; }
         .accordion-content { max-height: 0; overflow: hidden; transition: max-height: 0.5s ease-in-out; }
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #D97706;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body class="text-slate-800">
@@ -68,11 +55,11 @@
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
                         <div class="bg-slate-50 p-4 rounded-lg border">
                             <p class="text-sm text-slate-500">Población (2024)</p>
-                            <p class="text-2xl font-bold text-slate-900">~49,000</p>
+                            <p class="text-2xl font-bold text-slate-900">49,333</p>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-lg border">
                             <p class="text-sm text-slate-500">Población Extranjera</p>
-                            <p class="text-2xl font-bold text-slate-900">~30%</p>
+                            <p class="text-2xl font-bold text-slate-900">29.84%</p>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-lg border">
                             <p class="text-sm text-slate-500">Renta Bruta Media</p>
@@ -80,13 +67,13 @@
                         </div>
                          <div class="bg-slate-50 p-4 rounded-lg border">
                             <p class="text-sm text-slate-500">Crecimiento Anual</p>
-                            <p class="text-2xl font-bold text-green-600">+1.5%</p>
+                            <p class="text-2xl font-bold text-green-600">+3.65%</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold mb-2">Seguridad Ciudadana</h3>
+                    <h3 class="text-xl font-bold mb-2">Seguridad Ciudadana (Datos Q1 2025)</h3>
                     <p class="text-slate-600 mb-4">Vic se considera, en general, un lugar seguro y pacífico. El índice de criminalidad es relativamente bajo, los residentes se sienten cómodos paseando y los delitos violentos son poco frecuentes. Sin embargo, como en cualquier ciudad, existen algunos problemas puntuales: por ejemplo, el barrio del Remei se ha enfrentado a problemas de ocupación ilegal y pequeña delincuencia en los últimos años. Es importante destacar que estos problemas se concentran en una zona; el resto de la ciudad sigue siendo segura, con un fuerte sentimiento de comunidad.</p>
                     <div class="chart-container">
                         <canvas id="crimeChart"></canvas>
@@ -103,7 +90,7 @@
                                 <span class="accordion-icon text-xl font-bold">+</span>
                             </button>
                             <div class="accordion-content p-4 bg-white border border-t-0 rounded-b-lg">
-                                <p class="text-slate-600">Vic es un entorno excepcional. Ofrece seguridad, un fuerte sentido de comunidad, y excelentes colegios y sanidad. El estilo de vida "slow" y el acceso a la naturaleza son ideales. <br><br><strong>Recomendación:</strong> Barrios como <strong>Santa Clara-Hospital</strong> por su tranquilidad y conveniencia, o las nuevas promociones en <strong>Estadi-Horta Vermella</strong>.</p>
+                                <p class="text-slate-600">Vic es un entorno excepcional. Ofrece seguridad, un fuerte sentido de comunidad (iniciativa "Ciutat Cuidadora"), y excelentes colegios y sanidad. El estilo de vida "slow" y el acceso a la naturaleza son ideales. <br><br><strong>Recomendación:</strong> Barrios como <strong>Santa Clara-Hospital</strong> por su tranquilidad y conveniencia, o las nuevas promociones en <strong>Estadi-Horta Vermella</strong>.</p>
                             </div>
                         </div>
                         <div class="accordion-item">
@@ -112,7 +99,7 @@
                                 <span class="accordion-icon text-xl font-bold">+</span>
                             </button>
                             <div class="accordion-content p-4 bg-white border border-t-0 rounded-b-lg">
-                                <p class="text-slate-600">El mercado está en un punto óptimo. Combina un crecimiento de precios estable con una asequibilidad relativa a Barcelona. La demanda de alquiler es constante y robusta, gracias a los estudiantes de la UVic-UCC. <br><br><strong>Recomendación:</strong> Inversión "buy-to-let" en el barrio <strong>El Sucre-Universitat</strong>. Apartamentos de 2-3 habitaciones para alquilar a estudiantes ofrecen un gran potencial de rendimiento.</p>
+                                <p class="text-slate-600">El mercado está en un punto óptimo. Combina un crecimiento de precios estable con una asequibilidad relativa a Barcelona. La demanda de alquiler es constante y robusta, gracias a los más de 15,000 estudiantes de la UVic-UCC. <br><br><strong>Recomendación:</strong> Inversión "buy-to-let" en el barrio <strong>El Sucre-Universitat</strong>. Apartamentos de 2-3 habitaciones para alquilar a estudiantes ofrecen un gran potencial de rendimiento y revalorización.</p>
                             </div>
                         </div>
                          <div class="accordion-item">
@@ -121,7 +108,7 @@
                                 <span class="accordion-icon text-xl font-bold">+</span>
                             </button>
                             <div class="accordion-content p-4 bg-white border border-t-0 rounded-b-lg">
-                                <p class="text-slate-600">Una alternativa excelente a Barcelona. La conexión en tren (R3, ~75 min) es fiable, aunque no de alta velocidad. El coste de vida es drásticamente inferior, permitiendo un mayor poder adquisitivo. <br><br><strong>Recomendación:</strong> Apartamentos modernos cerca de la estación en <strong>El Sucre-Universitat</strong> o <strong>Santa Clara</strong> para un estilo de vida cómodo y bien conectado.</p>
+                                <p class="text-slate-600">Una alternativa excelente a Barcelona. La conexión en tren (R3, ~75 min) es fiable, aunque no de alta velocidad. El coste de vida es drásticamente inferior, permitiendo un mayor poder adquisitivo y calidad de vida sin renunciar a servicios de primer nivel. <br><br><strong>Recomendación:</strong> Apartamentos modernos cerca de la estación en <strong>El Sucre-Universitat</strong> o <strong>Santa Clara</strong> para un estilo de vida cómodo y bien conectado.</p>
                             </div>
                         </div>
                     </div>
@@ -132,27 +119,19 @@
             <section id="vivir" class="hidden space-y-8 md:space-y-12">
                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
                     <h2 class="text-2xl md:text-3xl font-bold mb-4">Guía de Barrios Residenciales</h2>
-                    <p class="text-slate-600 mb-6">Cada barrio de Vic ofrece un carácter distinto. La elección depende del estilo de vida, presupuesto y necesidades familiares. Explora las descripciones o usa nuestro asistente de IA para encontrar tu barrio ideal.</p>
+                    <p class="text-slate-600 mb-6">Cada barrio de Vic ofrece un carácter distinto. La elección depende del estilo de vida, presupuesto y necesidades familiares. Explora las descripciones para encontrar tu barrio ideal.</p>
                     <div id="neighborhood-selector" class="grid grid-cols-2 md:grid-cols-5 gap-2 mb-6"></div>
                     <div id="neighborhood-display" class="bg-slate-50 p-6 rounded-lg border border-slate-200 min-h-[200px] smooth-transition"></div>
-                </div>
-
-                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold mb-2">✨ Asistente de Búsqueda de Barrio</h3>
-                    <p class="text-slate-600 mb-4">Describe tu estilo de vida y lo que buscas en un barrio. Nuestra IA te recomendará el más adecuado.</p>
-                    <textarea id="lifestyle-input" class="w-full p-2 border rounded-md" placeholder="Ej: Somos una familia con dos niños pequeños, buscamos zonas verdes, colegios cerca y un ambiente tranquilo."></textarea>
-                    <button id="find-neighborhood-btn" class="mt-2 px-4 py-2 bg-amber-600 text-white font-semibold rounded-md hover:bg-amber-700 smooth-transition">Encontrar mi barrio ideal</button>
-                    <div id="neighborhood-result" class="mt-4 p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg hidden"></div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
                         <h3 class="text-xl font-bold mb-2">Sistema Educativo</h3>
-                        <p class="text-slate-600 mb-4">Vic es conocida por su sólida oferta educativa. Hay numerosas escuelas primarias y secundarias, tanto públicas como concertadas (semiprivadas), como el prestigioso Col·legi Sant Miquel dels Sants. La presencia de la Universidad de Vic - Universitat Central de Catalunya (UVic) eleva el entorno educativo de la ciudad.</p>
+                        <p class="text-slate-600 mb-4">Vic es conocida por su sólida oferta educativa, que es buena para las familias y ayuda a mantener el valor de las propiedades. La ciudad cuenta con numerosas escuelas primarias y secundarias. Las escuelas públicas son de buena calidad y enseñan en catalán/español. También hay escuelas concertadas (semiprivadas) de buena reputación, como el Col·legi Sant Miquel dels Sants. Lo más importante es que Vic alberga la Universidad de Vic - Universitat Central de Catalunya (UVic), una creciente universidad privada con unos 9.000 estudiantes. Aunque la universidad se centra principalmente en la educación superior, su presencia eleva el entorno educativo de la ciudad.</p>
                     </div>
                      <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
                         <h3 class="text-xl font-bold mb-2">Sanidad y Servicios Sociales</h3>
-                        <p class="text-slate-600 mb-4">Vic es el centro sanitario de Osona. El Hospital Universitari de Vic es un moderno hospital general que da servicio a la región, y hay varias clínicas de atención primaria (CAP). El sistema sanitario es robusto y accesible.</p>
+                        <p class="text-slate-600 mb-4">Vic es un lugar excelente para las familias y para vivir a largo plazo. El sistema sanitario es sólido: tener un gran hospital en la ciudad es una gran ventaja. El Hospital Universitari de Vic ofrece atención de urgencia 24/7, pediatría, servicios de maternidad, etc., lo que garantiza que la atención médica esté a pocos minutos. Además del hospital principal, hay clínicas de barrio (CAP) para la atención primaria. En cuanto a las actividades recreativas, las actividades para niños son abundantes: el consejo deportivo de la ciudad organiza ligas deportivas juveniles, y hay instalaciones deportivas y piscinas públicas. Los servicios sociales en Vic también están bien desarrollados; la ciudad cuenta con centros de apoyo familiar, subvenciones para guarderías y centros comunitarios que ofrecen talleres para todas las edades.</p>
                     </div>
                 </div>
             </section>
@@ -160,62 +139,46 @@
             <section id="invertir" class="hidden space-y-8 md:space-y-12">
                  <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
                     <h2 class="text-2xl md:text-3xl font-bold mb-4">Análisis del Mercado Inmobiliario</h2>
-                    <p class="text-slate-600 mb-6">El mercado de la vivienda en Vic ha sido moderadamente fuerte, con una tendencia general al alza en los últimos años. La demanda procede de familias locales, de personas que se trasladan desde Barcelona en busca de un mejor coste de vida y de inversores que buscan propiedades para alquilar (especialmente para estudiantes).</p>
-                    <div class="grid md:grid-cols-2 gap-8">
+                    <p class="text-slate-600 mb-6">El mercado de la vivienda en Vic ha sido moderadamente fuerte. A principios de 2025, el precio medio de venta de una propiedad es de unos 2.086 € por metro cuadrado. En comparación, esto es menos de la mitad de la media de la ciudad de Barcelona (más de 4.800 €/m²), lo que pone de manifiesto la relativa asequibilidad de Vic en la región. Mientras tanto, los alquileres medios en Vic rondan los 9,8 € por m² al mes, de nuevo muy por debajo de Barcelona (~23,5 €/m²). El mercado no es tan volátil ni tan caro como el de las zonas costeras o metropolitanas; se trata de un mercado estable y en crecimiento constante, más que de un punto caliente especulativo.</p>
+                    <div class="grid md:grid-cols-2 gap-8 mt-6">
                         <div>
-                            <h3 class="text-xl font-bold mb-2">Precio de Venta (€/m²)</h3>
-                             <p class="text-center text-4xl font-bold text-slate-800 my-8">~€2,086<span class="text-lg font-normal text-slate-500">/m²</span></p>
-                            <p class="text-slate-600 text-center">Menos de la mitad del precio medio de Barcelona, lo que pone de manifiesto la relativa asequibilidad de Vic.</p>
+                            <h3 class="text-xl font-bold mb-2">Precio de Venta (Junio 2025)</h3>
+                             <p class="text-center text-4xl font-bold text-slate-800 my-4">€2,245<span class="text-lg font-normal text-slate-500">/m²</span></p>
+                            <p class="text-slate-600 text-center text-green-600 font-semibold">+12.9% Crecimiento Anual</p>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold mb-2">Precio del Alquiler (€/m²/mes)</h3>
-                            <p class="text-center text-4xl font-bold text-slate-800 my-8">~€9.8<span class="text-lg font-normal text-slate-500">/m²</span></p>
-                            <p class="text-slate-600 text-center">Un mercado de alquiler activo, impulsado por la población estudiantil y los residentes locales.</p>
+                            <h3 class="text-xl font-bold mb-2">Alquiler Medio (Junio 2025)</h3>
+                            <p class="text-center text-4xl font-bold text-slate-800 my-4">~€874<span class="text-lg font-normal text-slate-500">/mes</span></p>
+                            <p class="text-slate-600 text-center">Mercado de alquiler activo, impulsado por la población estudiantil.</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold mb-2">✨ Análisis de Inversión con IA</h3>
-                    <p class="text-slate-600 mb-4">Define tu perfil de inversor y deja que nuestra IA analice las oportunidades en Vic para ti.</p>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="investment-goal" class="block text-sm font-medium text-slate-700">Objetivo de Inversión</label>
-                            <select id="investment-goal" class="mt-1 block w-full p-2 border rounded-md">
-                                <option>Rendimiento por alquiler a largo plazo</option>
-                                <option>Apreciación del capital a medio plazo</option>
-                                <option>Comprar, reformar y vender (Fix & Flip)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="investment-budget" class="block text-sm font-medium text-slate-700">Presupuesto (€)</label>
-                            <input type="number" id="investment-budget" class="mt-1 block w-full p-2 border rounded-md" placeholder="Ej: 200000">
-                        </div>
-                    </div>
-                    <button id="analyze-investment-btn" class="mt-4 px-4 py-2 bg-amber-600 text-white font-semibold rounded-md hover:bg-amber-700 smooth-transition">Analizar Oportunidad</button>
-                    <div id="investment-result" class="mt-4 p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg hidden"></div>
-                </div>
-
                  <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
                     <h3 class="text-xl font-bold mb-2">Impuestos sobre la Propiedad y Coste de la Vida</h3>
-                    <p class="text-slate-600 mb-4">El coste de la vida en Vic es moderado. Los gastos diarios como la compra, la restauración y los servicios están a la par o ligeramente por debajo de la media española. El impuesto anual sobre bienes inmuebles (IBI) en Vic es de aproximadamente el <span class="font-bold">0,626%</span> del valor catastral de la propiedad, una de las tasas más bajas para ciudades comparables de la provincia. Hay descuentos disponibles para viviendas energéticamente eficientes y familias numerosas.</p>
+                    <p class="text-slate-600 mb-4">El coste de la vida en Vic es moderado. Los gastos diarios como la compra, la restauración y los servicios están a la par o ligeramente por debajo de la media española. El impuesto anual sobre bienes inmuebles (IBI) en Vic es de aproximadamente el <span class="font-bold">0,626%</span> del valor catastral de la propiedad, una de las tasas más bajas para ciudades comparables de la provincia. Hay descuentos disponibles para viviendas energéticamente eficientes y familias numerosas. El Ayuntamiento de Vic señala que este tipo impositivo es de los más bajos de las ciudades de la provincia de tamaño similar.</p>
+                    <h3 class="text-xl font-bold mb-2 mt-4">Potencial de Reventa y Alquiler</h3>
+                    <p class="text-slate-600 mb-4">Comprar en Vic parece una buena inversión de futuro. El crecimiento de la población de la ciudad y la expansión de la universidad garantizan una demanda de vivienda continua. El mercado no es un mercado turístico de auge y caída; más bien, los valores aumentan de forma constante con la economía local. Vic es atractiva para el alquiler, tanto a largo como a corto plazo. La Universidad atrae a estudiantes y profesores visitantes que necesitan alojamiento. La ocupación de los alquileres a largo plazo debería ser alta dada la universidad y la mano de obra local.</p>
                 </div>
             </section>
             
             <section id="economia" class="hidden space-y-8 md:space-y-12">
                  <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
                     <h2 class="text-2xl md:text-3xl font-bold mb-4">Motor Económico de Osona</h2>
-                    <p class="text-slate-600 mb-6">La economía de Vic es diversa y resistente, anclada en un potente sector agroalimentario, una industria sólida y un sector servicios que actúa como centro comercial para toda la comarca. Esta estabilidad proporciona una base de empleo sólida.</p>
-                    <div class="accordion-item">
+                    <p class="text-slate-600 mb-6">La economía de Vic es diversa y resistente, anclada en un potente sector agroalimentario, una industria sólida y un sector servicios que actúa como centro comercial para toda la comarca. Históricamente conocida por las industrias textil y del cuero, hoy ha pasado a tener como sectores dominantes el agroalimentario y el metalúrgico. La comarca es famosa por la carne de cerdo y los embutidos (la industria agroalimentaria de Vic es un importante empleador).</p>
+                    <div class="accordion-item mt-4">
                         <button class="accordion-header w-full text-left p-4 bg-amber-50 rounded-lg font-semibold flex justify-between items-center">
                             Principales Empresas y Empleadores
                             <span class="accordion-icon text-xl font-bold">+</span>
                         </button>
                         <div class="accordion-content p-4 bg-white border border-t-0 rounded-b-lg">
                             <ul class="list-disc list-inside space-y-2 text-slate-600">
-                                <li><strong>Industria agroalimentaria:</strong> Empresas como Casa Tarradellas (en la cercana Gurb) son líderes nacionales y grandes empleadores.</li>
-                                <li><strong>Sector servicios:</strong> El comercio minorista, la educación (Universidad de Vic) y la sanidad (Consorci Hospitalari de Vic) son pilares del empleo local.</li>
-                                <li><strong>Industria metalúrgica:</strong> Un sector tradicional que se ha modernizado y sigue siendo importante.</li>
+                                <li><strong>Grup Bon Preu:</strong> Gigante de los supermercados con fuerte identidad catalana.</li>
+                                <li><strong>Casa Tarradellas:</strong> Líder nacional en producción de alimentos (pizzas, embutidos).</li>
+                                <li><strong>Costa Food Meat:</strong> Importante procesador cárnico.</li>
+                                <li><strong>La Farga:</strong> Líder mundial en reciclaje y manufactura de cobre.</li>
+                                <li><strong>Onnera Laundry Barcelona:</strong> Fabricante de equipamiento de lavandería industrial.</li>
+                                <li><strong>Universidad de Vic y Consorci Hospitalari de Vic:</strong> Grandes empleadores del sector servicios.</li>
                             </ul>
                         </div>
                     </div>
@@ -224,8 +187,8 @@
                  <div class="grid md:grid-cols-2 gap-8">
                      <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
                         <h3 class="text-xl font-bold mb-2">Conectividad y Transporte</h3>
-                        <p class="text-slate-600 mb-4">Vic está estratégicamente ubicada y excelentemente comunicada, facilitando tanto la vida diaria como los desplazamientos regionales.</p>
-                         <div class="space-y-4">
+                        <p class="text-slate-600 mb-4">Vic es relativamente fácil de recorrer y no está muy congestionada por el tráfico. Dentro de la ciudad, la mayoría de las distancias se pueden recorrer a pie o en un corto trayecto en bicicleta. La ciudad también cuenta con autobuses urbanos que conectan los diferentes barrios. Fundamentalmente, Vic goza de una buena conectividad regional.</p>
+                         <div class="space-y-4 mt-4">
                             <div class="flex items-center space-x-4"><span class="text-xl font-bold text-amber-700 w-16 text-center">R3</span><div><h4 class="font-semibold">Tren a Barcelona</h4><p class="text-slate-600 text-sm">~1h 15min a Plaça Catalunya. No es de alta velocidad, pero es una opción para los que se desplazan al trabajo.</p></div></div>
                             <div class="flex items-center space-x-4"><span class="text-xl font-bold text-amber-700 w-16 text-center">C-17</span><div><h4 class="font-semibold">Autovía a Barcelona</h4><p class="text-slate-600 text-sm">~55 min en coche (69 km).</p></div></div>
                             <div class="flex items-center space-x-4"><span class="text-xl font-bold text-amber-700 w-16 text-center">C-25</span><div><h4 class="font-semibold">Eix Transversal</h4><p class="text-slate-600 text-sm">Conexión este-oeste con Girona (~50 min) y Lleida (~2h).</p></div></div>
@@ -234,38 +197,8 @@
                     </div>
                      <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
                         <h3 class="text-xl font-bold mb-2">Cultura, Ocio y Deporte</h3>
-                        <p class="text-slate-600 mb-4">La oferta cultural y de ocio es rica y variada. Planifica tu visita con nuestro generador de itinerarios.</p>
-                         <div class="space-y-4">
-                            <div class="flex items-start space-x-4"><span class="text-2xl">🏛️</span><div><h4 class="font-semibold">Museo Episcopal (MEV)</h4><p class="text-slate-600 text-sm">Colección de arte medieval de referencia mundial.</p></div></div>
-                            <div class="flex items-start space-x-4"><span class="text-2xl">🎭</span><div><h4 class="font-semibold">L'Atlàntida</h4><p class="text-slate-600 text-sm">Centro de artes escénicas para toda la comarca.</p></div></div>
-                            <div class="flex items-start space-x-4"><span class="text-2xl">🏞️</span><div><h4 class="font-semibold">Naturaleza y Deporte</h4><p class="text-slate-600 text-sm">Acceso al Montseny. Múltiples gimnasios y un gran Decathlon.</p></div></div>
-                        </div>
+                        <p class="text-slate-600 mb-4">A pesar de su modesto tamaño, Vic ofrece una completa oferta de servicios. Hay multitud de tiendas y una gran abundancia de cafés, restaurantes y panaderías. Culturalmente, Vic está por encima de sus posibilidades: cuenta con el Museo Episcopal de Vic, una catedral románica y acoge eventos como el Mercat de Música Viva. En cuanto al ocio, el Teatro y Auditorio de la Atlàntida ofrece conciertos y obras de teatro, y hay cines, galerías de arte y numerosos festivales locales.</p>
                     </div>
-                </div>
-                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold mb-2">✨ Generador de Itinerarios</h3>
-                    <p class="text-slate-600 mb-4">Selecciona tus intereses y la duración de tu visita para obtener un plan personalizado.</p>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="interests" class="block text-sm font-medium text-slate-700">Intereses</label>
-                            <select id="interests" class="mt-1 block w-full p-2 border rounded-md">
-                                <option>Historia y Cultura</option>
-                                <option>Gastronomía Local</option>
-                                <option>Naturaleza y Senderismo</option>
-                                <option>Diversión en Familia</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="duration" class="block text-sm font-medium text-slate-700">Duración</label>
-                             <select id="duration" class="mt-1 block w-full p-2 border rounded-md">
-                                <option>1 día</option>
-                                <option>Un fin de semana (2 días)</option>
-                                <option>3 días</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button id="generate-itinerary-btn" class="mt-4 px-4 py-2 bg-amber-600 text-white font-semibold rounded-md hover:bg-amber-700 smooth-transition">✨ Generar Itinerario</button>
-                    <div id="itinerary-result" class="mt-4 p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg hidden"></div>
                 </div>
             </section>
         </main>
@@ -361,89 +294,16 @@
             const crimeData = {
                 labels: ['Delitos Totales', 'Robos con Violencia', 'Robos en Domicilio'],
                 datasets: [{
-                    label: 'Tendencia Reciente',
-                    data: [2, 0, 5], 
-                    backgroundColor: ['#64748b', '#16a34a', '#f59e0b'],
-                    borderColor: ['#475569', '#15803d', '#d97706'],
+                    label: 'Variación Anual (%) Q1 2025',
+                    data: [6.82, 0, 43.86], 
+                    backgroundColor: ['#64748b', '#16a34a', '#dc2626'],
+                    borderColor: ['#475569', '#15803d', '#b91c1c'],
                     borderWidth: 1
                 }]
             };
             new Chart(document.getElementById('crimeChart'), {
-                type: 'bar', data: crimeData, options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true, title: { display: true, text: 'Variación Anual Aprox. (%)' } } }, plugins: { legend: { display: false }, title: {display: true, text: 'Tendencia General de la Criminalidad'} } }
+                type: 'bar', data: crimeData, options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true, title: { display: true, text: 'Variación vs Año Anterior (%)' } } }, plugins: { legend: { display: false }, title: {display: true, text: 'Tendencia de la Criminalidad (Q1 2025)'} } }
             });
-
-            async function callGemini(prompt, resultElement) {
-                resultElement.innerHTML = '<div class="loader"></div>';
-                resultElement.classList.remove('hidden');
-
-                const apiKey = ""; 
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-                
-                const payload = {
-                    contents: [{ role: "user", parts: [{ text: prompt }] }]
-                };
-
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`API request failed with status ${response.status}`);
-                    }
-
-                    const result = await response.json();
-                    
-                    if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
-                        const text = result.candidates[0].content.parts[0].text;
-                        resultElement.innerHTML = text.replace(/\n/g, '<br>');
-                    } else {
-                        resultElement.innerHTML = '<p class="text-red-600">No se pudo obtener una respuesta. Por favor, inténtalo de nuevo.</p>';
-                    }
-                } catch (error) {
-                    console.error('Error calling Gemini API:', error);
-                    resultElement.innerHTML = `<p class="text-red-600">Error al contactar con el servicio de IA. Detalles: ${error.message}</p>`;
-                }
-            }
-            
-            const neighborhoodDataForPrompt = `
-                - Casco Antiguo: Histórico y con encanto. Ideal para amantes de la cultura. Vivienda en apartamentos históricos renovados.
-                - El Sucre-Universitat: Moderno y académico. Ideal para estudiantes y jóvenes profesionales. Vivienda en apartamentos y dúplex modernos.
-                - Santa Clara-Hospital: Tranquilo y conveniente. Ideal para familias y personal sanitario. Mixto de pisos y casas, con zonas verdes.
-                - Estadi-Horta Vermella: Residencial y deportivo. Ideal para familias. Nuevas construcciones con terrazas.
-                - Remei: Asequible y en revitalización. Ideal para quienes buscan precios más bajos. Barrio obrero con problemas pasados, pero en mejora con nuevas infraestructuras.
-            `;
-
-            document.getElementById('find-neighborhood-btn').addEventListener('click', () => {
-                const lifestyle = document.getElementById('lifestyle-input').value;
-                if (!lifestyle) {
-                    alert('Por favor, describe tu estilo de vida.');
-                    return;
-                }
-                const prompt = `Como experto inmobiliario de Vic, analiza la siguiente descripción de un cliente y recomiéndale el mejor barrio de Vic. Justifica tu respuesta basándote en estos datos de los barrios: ${neighborhoodDataForPrompt}. Cliente: "${lifestyle}"`;
-                callGemini(prompt, document.getElementById('neighborhood-result'));
-            });
-
-            document.getElementById('analyze-investment-btn').addEventListener('click', () => {
-                const goal = document.getElementById('investment-goal').value;
-                const budget = document.getElementById('investment-budget').value;
-                if (!budget) {
-                    alert('Por favor, introduce tu presupuesto.');
-                    return;
-                }
-                const prompt = `Actúa como un analista de inversiones inmobiliarias para Vic, España. Un cliente tiene un presupuesto de ${budget}€ y su objetivo es "${goal}". Basándote en que el precio medio es 2,086€/m², la fuerte demanda de alquiler por parte de estudiantes, y un mercado estable, proporciona un breve análisis de la oportunidad, sugiriendo qué tipo de propiedad y en qué barrio podría ser más interesante. Menciona el potencial de rendimiento por alquiler.`;
-                callGemini(prompt, document.getElementById('investment-result'));
-            });
-
-            document.getElementById('generate-itinerary-btn').addEventListener('click', () => {
-                const interests = document.getElementById('interests').value;
-                const duration = document.getElementById('duration').value;
-                const prompt = `Crea un itinerario detallado para una visita a Vic, España, de ${duration}. El visitante está interesado en "${interests}". Utiliza lugares clave de Vic como el Museo Episcopal (MEV), la Plaça Major, el Templo Romano, la Catedral, y recomienda experiencias locales como probar la llonganissa de Vic o pasear por el río. Estructura la respuesta por días (Día 1, Día 2, etc.) y momentos (Mañana, Tarde, Noche).`;
-                callGemini(prompt, document.getElementById('itinerary-result'));
-            });
-
         });
     </script>
 </body>
